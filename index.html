@@ -57,7 +57,43 @@
       50% { transform: scale(1.05); }
       100% { transform: scale(1); }
     }
+.heart {
+  position: fixed;
+  top: -10px;
+  width: 15px;
+  height: 15px;
+  background: pink;
+  transform: rotate(45deg);
+  animation: fall 6s linear infinite;
+  z-index: 999;
+}
 
+.heart::before,
+.heart::after {
+  content: '';
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background: pink;
+  border-radius: 50%;
+}
+
+.heart::before {
+  top: -7.5px;
+  left: 0;
+}
+
+.heart::after {
+  top: 0;
+  left: -7.5px;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
     footer {
       margin-top: 50px;
       font-size: 0.9em;
@@ -121,5 +157,20 @@
   <footer>
     Feito com amor por você, só pra ela 🥹
   </footer>
+  <script>
+  function createHeart() {
+    const heart = document.createElement('div');
+    heart.classList.add('heart');
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (Math.random() * 2 + 3) + "s";
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+      heart.remove();
+    }, 6000);
+  }
+
+  setInterval(createHeart, 300);
+  </script>
 </body>
 </html>
