@@ -41,16 +41,26 @@
     }
 
     .love-button {
-      margin-top: 40px;
-      font-size: 1.5em;
-      padding: 15px 30px;
-      background: white;
-      color: #8b0000;
-      border: none;
-      border-radius: 50px;
-      cursor: pointer;
-      animation: pulse 2s infinite;
-    }
+  margin-top: 40px;
+  font-size: 1.5em;
+  padding: 15px 30px;
+  background: linear-gradient(45deg, #ff99cc, #ff3366);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 0 20px #ff66aa;
+  animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    box-shadow: 0 0 10px #ff66aa;
+  }
+  to {
+    box-shadow: 0 0 30px #ff3399, 0 0 60px #ff0066;
+  }
+}
 
     @keyframes pulse {
       0% { transform: scale(1); }
@@ -151,8 +161,8 @@
     <img src="nossa_fotto.jpg" alt="Essa é especial" class="photo">
   </div>
 
-  <button class="love-button" onclick="alert('Eu te amo, minha princesa! ❤️')">
-    Te amoo 🫶
+  <button class="love-button" onclick="explodeHearts()">
+  Te amo 💘
   </button>
 
   <footer>
@@ -173,5 +183,42 @@
 
   setInterval(createHeart, 300);
   </script>
+<script>
+  function createHeart() {
+    const heart = document.createElement('div');
+    heart.classList.add('heart');
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (Math.random() * 2 + 3) + "s";
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+      heart.remove();
+    }, 6000);
+  }
+
+  // corações caindo automaticamente
+  setInterval(createHeart, 300);
+
+  // 💘 Explosão de corações ao clicar
+  function explodeHearts() {
+    for (let i = 0; i < 30; i++) {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.top = Math.random() * 100 + "vh";
+      heart.style.position = 'fixed';
+      heart.style.zIndex = 1000;
+      heart.style.animation = 'none';
+      heart.style.opacity = 1;
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 1500);
+    }
+
+    // Alerta fofo
+    setTimeout(() => {
+      alert("Eu te amo muito, minha princesa 💜");
+    }, 500);
+  }
+</script>
 </body>
 </html>
